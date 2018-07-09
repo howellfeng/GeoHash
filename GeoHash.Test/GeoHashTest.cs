@@ -10,11 +10,11 @@ namespace GeoHash.Test
         [Fact(DisplayName = "鸟巢")]
         public void BridNestTest()
         {
-            GeoHash hash = GeoHash.EncodeWithCharacterPrecision(116.402843, 39.999375, 8);            
+            GeoHash hash = GeoHash.EncodeWithCharacterPrecision(116.402843, 39.999375, 8);
             string result = hash.ToBase32();
             Assert.Equal("wx4g8c9v", result);
         }
-        [Theory(DisplayName = "水立方,故宫")]
+        [Theory(DisplayName = "geohash值测试水立方,故宫等")]
         [InlineData(116.3967, 39.99932, 8, "wx4g89tk")]
         [InlineData(116.40382, 39.918118, 8, "wx4g0ffe")]
         [InlineData(116.3967, 44.9999, 8, "wxfzbxvr")]
@@ -53,6 +53,16 @@ namespace GeoHash.Test
             GeoHash hash = GeoHash.EncodeWithCharacterPrecision(120, 30, 10);
             GeoHash hash2 = GeoHash.EncodeWithCharacterPrecision(120, 30, 10);
             Assert.True(hash.Equals(hash2));
+        }
+        [Fact(DisplayName ="字符串精度超长")]
+        public void StringOverlengthTest()
+        {
+            Assert.Throws<NotSupportedException>(() => GeoHash.EncodeWithCharacterPrecision(120, 30, GeoHash.MaxCharacterLength + 1));
+        }
+        [Fact(DisplayName ="Bit精度超长")]
+        public void BitsOverlengthTest()
+        {
+            Assert.Throws<NotSupportedException>(() => GeoHash.EncodeWithBitPrecision(120, 30, GeoHash.MaxBitLength + 1));
         }
     }
 }

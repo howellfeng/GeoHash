@@ -41,8 +41,12 @@ namespace GeoHash
                     GeoHash hash = GeoHash.EncodeWithCharacterPrecision(x, y, characterLength);
                     if (!_geoHashes.Contains(hash))
                         _geoHashes.Add(hash);
+                    if (y == rect.Bottom)
+                        break;
                     y = nextLonLat(y, yRange, rect.Bottom);
                 }
+                if (x == rect.Right)
+                    break;
                 x = nextLonLat(x, xRange, rect.Right);
             }
         }

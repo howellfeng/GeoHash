@@ -9,8 +9,8 @@ namespace GeoHash
     {
         public static readonly double[] LonBitRange = new double[GeoHash.MaxBitLength];
         public static readonly double[] LatBitRange = new double[GeoHash.MaxBitLength];
-        public static readonly double[] LonCharacterRange = new double[GeoHash.MaxCharacterLength];
-        public static readonly double[] LatCharacterRange = new double[GeoHash.MaxCharacterLength];
+        public static readonly double[] LonCharacterRange = new double[GeoHash.MaxCharacterLength + 1];
+        public static readonly double[] LatCharacterRange = new double[GeoHash.MaxCharacterLength + 1];
         static GeoHashSizeTable()
         {
             //_lonRangle和_latRange的index=Bit的长度，StringLength=8,BitLength=8*5=40，_lonRangle[index]和_latRangle[index]表示在BitLength=index时，每个网格的经度和纬度范围
@@ -51,7 +51,7 @@ namespace GeoHash
         {
             int length = GeoHash.MaxCharacterLength;
             double width = rect.Width, height = rect.Height;
-            while ((LonCharacterRange[length] < width || LatCharacterRange[length] < length) && length > 0)
+            while ((LonCharacterRange[length] < width || LatCharacterRange[length] < height) && length > 0)
                 length--;
             return length;
         }
