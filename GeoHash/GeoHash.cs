@@ -13,7 +13,7 @@ namespace GeoHash
         public const int MaxCharacterLength = 12;
         //public const int MaxBitLength = 60;
         public const int MaxBitLength = MaxCharacterLength * Base32Bits;
-        public const int Base32Bits = 5;
+        public const int Base32Bits = 5;//base32编码每个字符5个字节
         private static readonly char[] _base32 = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };        
         public long Bits { get; private set; } = 0;
         public RectangleD Bound { get; private set; }        
@@ -50,7 +50,7 @@ namespace GeoHash
             DesiredPrecision = desiredPrecision;
             double[] longitudeRange = new double[] { -180, 180 };
             double[] latitudeRange = new double[] { -90, 90 };
-            bool isEvenNumbers = true;
+            bool isEvenNumbers = true;//是否偶数
             for (int i = 0; i < desiredPrecision; i++)
             {
                 if (isEvenNumbers)
